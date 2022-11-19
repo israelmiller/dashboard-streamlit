@@ -54,7 +54,20 @@ st.bar_chart(df_bar)
 st.write("The filtered data is shown below")
 st.write(df_bar)
 
-
+## Code for the bar chart
+st.code("""
+## Code for the bar chart
+#group by city and count the number of times the commodity was reported
+df_bar = df.groupby(['city_name_', 'commodity']).count().reset_index()
+df_bar = df_bar[['city_name_', 'commodity', 'date']]
+df_bar = df_bar[df_bar['commodity'] == select_commodity]
+df_bar = df_bar.rename(columns={'date': 'count'})
+df_bar.drop('commodity', axis=1, inplace=True)
+df_bar = df_bar.set_index('city_name_')
+st.bar_chart(df_bar)
+st.write("The filtered data is shown below")
+st.write(df_bar)
+""")
 
 
 
